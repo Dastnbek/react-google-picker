@@ -21,7 +21,6 @@ export default class GoogleChooser extends React.Component {
         onAuthFailed: PropTypes.func,
         createPicker: PropTypes.func,
         multiselect: PropTypes.bool,
-        navHidden: PropTypes.bool,
         disabled: PropTypes.bool
   };
 
@@ -33,7 +32,6 @@ export default class GoogleChooser extends React.Component {
     viewId: 'DOCS',
     authImmediate: false,
     multiselect: false,
-    navHidden: false,
     disabled: false
   };
 
@@ -115,6 +113,7 @@ export default class GoogleChooser extends React.Component {
     }
 
     const googleViewId = google.picker.ViewId[this.props.viewId];
+    const uploadView = new window.google.picker.DocsUploadView();
     const view = new window.google.picker.View(googleViewId);
 
     if (this.props.mimeTypes) {
@@ -130,16 +129,13 @@ export default class GoogleChooser extends React.Component {
 
     const picker = new window.google.picker.PickerBuilder()
                              .addView(view)
+                             .addView(uploadView)
                              .setOAuthToken(oauthToken)
                              .setDeveloperKey(this.props.developerKey)
                              .setCallback(this.props.onChange);
 
     if (this.props.origin) {
       picker.setOrigin(this.props.origin);
-    }
-
-    if (this.props.navHidden) {
-      picker.enableFeature(window.google.picker.Feature.NAV_HIDDEN)
     }
 
     if (this.props.multiselect) {

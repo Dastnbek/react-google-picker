@@ -1,11 +1,12 @@
-React google picker
+React google picker 
+[ Added upload feature to base repo ]
 ===================
 Simple react wrapper for [Google Picker API](https://developers.google.com/picker/docs/)
 
 Installation
 ============
 ```
-npm install react-google-picker
+npm install google-picker-component
 ```
 
 Usage
