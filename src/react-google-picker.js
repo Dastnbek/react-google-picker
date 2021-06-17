@@ -11,6 +11,7 @@ export default class GoogleChooser extends React.Component {
     static propTypes = {
         children: PropTypes.node,
         clientId: PropTypes.string.isRequired,
+        appId: PropTypes.string.isRequired,
         developerKey: PropTypes.string,
         scope: PropTypes.array,
         viewId: PropTypes.string,
@@ -28,7 +29,7 @@ export default class GoogleChooser extends React.Component {
     onChange: () => {},
     onAuthenticate: () => {},
     onAuthFailed: () => {},
-    scope:['https://www.googleapis.com/auth/drive.readonly'],
+    scope:['https://www.googleapis.com/auth/drive.file'],
     viewId: 'DOCS',
     authImmediate: false,
     multiselect: false,
@@ -130,6 +131,7 @@ export default class GoogleChooser extends React.Component {
     const picker = new window.google.picker.PickerBuilder()
                              .addView(view)
                              .addView(uploadView)
+                             .setAppId(this.props.appId)
                              .setOAuthToken(oauthToken)
                              .setDeveloperKey(this.props.developerKey)
                              .setCallback(this.props.onChange);
